@@ -113,19 +113,19 @@ void Text::setColour(int r, int g, int b)
 	createTextTexture();
 }
 
-void Text::setColour(SDL_Colour fontColour)
+void Text::setColour(SDL_Colour inFontColour)
 {
 	//deletes the texture from memory
 	SDL_DestroyTexture(textureData);
 
 	//Set the font colour
-	this->fontColour = fontColour;
+	fontColour = inFontColour;
 
 	//Recreate the text texture
 	createTextTexture();
 }
 
-void Text::setFontSize(int fontSize)
+void Text::setFontSize(int inFontSize)
 {
 	//deletes the texture from memory
 	SDL_DestroyTexture(textureData);
@@ -134,16 +134,16 @@ void Text::setFontSize(int fontSize)
 	font = NULL;
 
 	//Set the font size
-	this->fontSize = fontSize;
+	fontSize = inFontSize;
 
 	//Set the font
-	font = TTF_OpenFont(fontLocation.c_str(), fontSize);
+	font = TTF_OpenFont(fontLocation.c_str(), inFontSize);
 
 	//Recreate the text texture
 	createTextTexture();
 }
 
-void Text::setFont(std::string fontLocation)
+void Text::setFont(std::string inFontLocation)
 {
 	//deletes the texture from memory
 	SDL_DestroyTexture(textureData);
@@ -152,19 +152,19 @@ void Text::setFont(std::string fontLocation)
 	font = NULL;
 
 	//Set the font
-	font = TTF_OpenFont(fontLocation.c_str(), fontSize);
+	font = TTF_OpenFont(inFontLocation.c_str(), fontSize);
 
 	//Recreate the text texture
 	createTextTexture();
 }
 
-void Text::setText(std::string text)
+void Text::setText(std::string inText)
 {
 	//deletes the texture from memory
 	SDL_DestroyTexture(textureData);
 
 	//Set the text
-	this->text = text;
+	text = inText;
 
 	//Recreate the text texture
 	createTextTexture();

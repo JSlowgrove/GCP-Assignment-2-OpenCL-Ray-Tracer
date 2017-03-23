@@ -8,6 +8,9 @@
 #include "../Core/Audio.h"
 #include "../Core/Music.h"
 #include "../Core/Text.h"
+#include "../RayTracer/Ray.h"
+#include "../RayTracer/RayTracer.h"
+#include "../RayTracer/Triangle.h"
 
 /**
 @brief A State that contains and runs the Main State.
@@ -50,4 +53,6 @@ private:
 	//C_Music* backgroundMusic;
 	///A pointer for the universal speed of the menu.
 	float* universalSpeed;
+	//The Triangle
+	Triangle triangle;
 };

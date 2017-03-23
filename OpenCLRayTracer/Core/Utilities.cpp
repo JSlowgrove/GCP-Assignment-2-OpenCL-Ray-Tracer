@@ -1,5 +1,7 @@
 #include "Utilities.h"
 
+#include "../ExternalLibraries/lodepng.h"
+
 namespace Utilities
 {
 	float getPI()
@@ -37,5 +39,17 @@ namespace Utilities
 			return true;
 		}
 		return false;
+	}
+
+	void generatePNG(const char* filename, std::vector<unsigned char>& image, unsigned width, unsigned height)
+	{
+		//Encode the image
+		unsigned error = lodepng::encode(filename, image, width, height);
+
+		//if there's an error, log it
+		if (error)
+		{
+			logE("encoder error " + std::to_string(error) + ": " + lodepng_error_text(error));
+		}
 	}
 }

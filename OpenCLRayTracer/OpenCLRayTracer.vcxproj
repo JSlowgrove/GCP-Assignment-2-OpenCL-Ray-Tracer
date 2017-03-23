@@ -75,6 +75,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\SDKs\SDL2015\include;C:\SDKs\clew\include;C:\SDKs\glm-0.9.8.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4201;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>C:\SDKs\clew\lib;C:\SDKs\SDL2015\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -124,6 +125,7 @@
     <ClCompile Include="Core\Texture.cpp" />
     <ClCompile Include="Core\Timer.cpp" />
     <ClCompile Include="Core\Utilities.cpp" />
+    <ClCompile Include="ExternalLibraries\lodepng.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RayTracer\Ray.cpp" />
     <ClCompile Include="RayTracer\RayTracer.cpp" />
@@ -142,6 +144,7 @@
     <ClInclude Include="Core\Texture.h" />
     <ClInclude Include="Core\Timer.h" />
     <ClInclude Include="Core\Utilities.h" />
+    <ClInclude Include="ExternalLibraries\lodepng.h" />
     <ClInclude Include="RayTracer\Ray.h" />
     <ClInclude Include="RayTracer\RayTracer.h" />
     <ClInclude Include="RayTracer\Sphere.h" />

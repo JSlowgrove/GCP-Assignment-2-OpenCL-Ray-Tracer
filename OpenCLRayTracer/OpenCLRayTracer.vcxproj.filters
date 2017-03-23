@@ -31,6 +31,12 @@
     <Filter Include="Source Files\RayTracer">
       <UniqueIdentifier>{261aee5d-2827-4bc6-ad07-1ba812a8751a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ExternalLibraries">
+      <UniqueIdentifier>{8f55bc03-2d5e-4eff-b9a0-5974b355e4aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ExternalLibraries">
+      <UniqueIdentifier>{85214f50-ab7a-4564-a419-e35325f3c513}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -81,6 +87,9 @@
     <ClCompile Include="RayTracer\RayTracer.cpp">
       <Filter>Source Files\RayTracer</Filter>
     </ClCompile>
+    <ClCompile Include="ExternalLibraries\lodepng.cpp">
+      <Filter>Source Files\ExternalLibraries</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RayTracer\Ray.h">
@@ -127,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="RayTracer\RayTracer.h">
       <Filter>Header Files\RayTracer</Filter>
+    </ClInclude>
+    <ClInclude Include="ExternalLibraries\lodepng.h">
+      <Filter>Header Files\ExternalLibraries</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

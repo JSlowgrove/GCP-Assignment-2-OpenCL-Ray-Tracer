@@ -94,19 +94,19 @@ public:
 	@brief Sets the colour of the text.
 	@param colour The colour of the font.
 	*/
-	void setColour(SDL_Colour colour);
+	void setColour(SDL_Colour inFontColour);
 
 	/**
 	@brief Sets the font size of the text.
 	@param fontSize The font size of the text.
 	*/
-	void setFontSize(int fontSize);
+	void setFontSize(int inFontSize);
 
 	/**
 	@brief Sets the font of the text.
 	@param fontLocation The location of the font file.
 	*/
-	void setFont(std::string fontLocation);
+	void setFont(std::string inFontLocation);
 
 	/**
 	@brief Sets the text.

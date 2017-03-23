@@ -1,5 +1,9 @@
 #pragma once
 
+#include <vector>
+#include "Ray.h"
+#include "Triangle.h"
+
 //Macros
 // Ref: http://cs.lth.se/tomas_akenine-moller
 #define EPSILON 0.000001
@@ -19,4 +23,10 @@ namespace RayTracer
 	int intersectTriangle(double orig[3], double dir[3],
 		double vert0[3], double vert1[3], double vert2[3],
 		double *t, double *u, double *v);
+
+	//A function to test for a ray triangle intersection
+	int rayTriangleIntersect(Ray& ray, Triangle& triangle);
+
+	//ray trace a triangle
+	std::vector<unsigned char> rayTraceTriangle(Triangle triangle);
 };

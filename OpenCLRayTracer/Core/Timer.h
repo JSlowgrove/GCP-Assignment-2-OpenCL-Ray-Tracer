@@ -31,13 +31,13 @@ public:
 	/**
 	@brief Changes the timer length.
 	*/
-	void setTimerLength(float timerLength);
+	void setTimerLength(float inTimerLength);
 
 
 	/**
 	@brief Change the timer length and reset the timer.
 	*/
-	void resetTimerLength(float timerLength);
+	void resetTimerLength(float inTimerLength);
 
 	/**
 	@brief Returns if the timer has finished or not.

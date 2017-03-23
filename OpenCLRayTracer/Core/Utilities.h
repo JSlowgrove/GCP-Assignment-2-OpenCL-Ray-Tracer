@@ -3,6 +3,7 @@
 #include <string>
 #include <SDL.h>
 #include <glm/glm.hpp>
+#include <vector>
 
 ///A definition of PI.
 #define PI 3.141596f
@@ -53,4 +54,6 @@ namespace Utilities
 	@returns True if the rectangles intersect
 	*/
 	bool rectRectIntersect(glm::vec2 PosBoxA, glm::vec2 DimBoxA, glm::vec2 PosBoxB, glm::vec2 DimBoxB);
+
+	void generatePNG(const char* filename, std::vector<unsigned char>& image, unsigned width, unsigned height);
 }

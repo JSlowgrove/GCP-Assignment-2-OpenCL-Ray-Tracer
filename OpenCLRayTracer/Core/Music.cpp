@@ -15,9 +15,6 @@ Music::~Music()
 {
 	//Free the audio
 	Mix_FreeMusic(music);
-	music = NULL;
-	//Delete the pointers
-	delete music;
 }
 
 void Music::startMusic()
