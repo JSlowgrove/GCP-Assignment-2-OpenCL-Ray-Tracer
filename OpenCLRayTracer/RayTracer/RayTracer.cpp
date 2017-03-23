@@ -1,6 +1,5 @@
 #include "RayTracer.h"
 
-#include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
 //Ref: http://cs.lth.se/tomas_akenine-moller
@@ -63,19 +62,19 @@ int RayTracer::rayTriangleIntersect(Ray& ray, Triangle& triangle)
 	return RayTracer::intersectTriangle(rayOrigin, rayDirection, triangleA, triangleB, triangleC, &t, &u, &v);
 }
 
-std::vector<unsigned char> RayTracer::rayTraceTriangle(Triangle triangle)
+std::vector<unsigned char> RayTracer::rayTraceTriangle(Triangle triangle, glm::vec2 screenDim, glm::vec3 colour)
 {
 	std::vector<unsigned char> pixels;
 	//set the vector size to contain at least the number of pixels * 4 bytes for RGBA 
-	pixels.reserve((300 * 300) * 4);
+	pixels.reserve((screenDim.x * screenDim.y) * 4);
 
 	//set the projection matrix for the ray tracer
-	glm::mat4 proj = glm::ortho(0.0f, 300.0f, 300.0f, 0.0f, 0.0f, 1000.0f);
+	glm::mat4 proj = glm::ortho(0.0f, screenDim.x, screenDim.y, 0.0f, 0.0f, 1000.0f);
 
 	//loop through all the pixels
-	for (unsigned int y = 0; y < 300; y++)
+	for (unsigned int y = 0; y < screenDim.y; y++)
 	{
-		for (unsigned int x = 0; x < 300; x++)
+		for (unsigned int x = 0; x < screenDim.x; x++)
 		{
 			//generate the ray
 			Ray ray;
@@ -85,13 +84,13 @@ std::vector<unsigned char> RayTracer::rayTraceTriangle(Triangle triangle)
 			//ray trace the triangle
 			int result = RayTracer::rayTriangleIntersect(ray, triangle);
 			
-			//r
-			pixels.push_back(0);
-			//g
-			pixels.push_back(0);
-			//if the result is equal 1 set blue channel to max
-			pixels.push_back(result == 1 ? 255 : 0);
-			//a
+			//if the result is equal 1 set red channel to in red
+			pixels.push_back(result == 1 ? colour.x : 0);
+			//if the result is equal 1 set green channel to in green
+			pixels.push_back(result == 1 ? colour.y : 0);
+			//if the result is equal 1 set blue channel to in blue
+			pixels.push_back(result == 1 ? colour.z : 0);
+			//alpha
 			pixels.push_back(255);
 		}
 	}

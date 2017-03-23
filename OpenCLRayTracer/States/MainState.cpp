@@ -17,8 +17,13 @@ MainState::MainState(StateManager* stateManager, SDL_Renderer* renderer, glm::ve
 	triangle.setPointB(glm::vec3(0, 300, 0));
 	triangle.setPointC(glm::vec3(300, 300, 0));
 
+	//The colour to make the triangle
+	glm::vec3 colour = glm::vec3(0.0f, 255.0f, 255.0f);
+
 	//generate a png with a ray trace triangle
-	Utilities::generatePNG("RayTraceOutput.png", RayTracer::rayTraceTriangle(triangle), 300, 300);
+	Utilities::generatePNG("RayTraceOutput.png", 
+		RayTracer::rayTraceTriangle(triangle, dimensions, colour), 
+		dimensions.x, dimensions.y);
 }
 
 MainState::~MainState()

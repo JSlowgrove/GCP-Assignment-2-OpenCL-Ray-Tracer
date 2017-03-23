@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "glm/glm.hpp"
 #include "Ray.h"
 #include "Triangle.h"
 
@@ -28,5 +29,5 @@ namespace RayTracer
 	int rayTriangleIntersect(Ray& ray, Triangle& triangle);
 
 	//ray trace a triangle
-	std::vector<unsigned char> rayTraceTriangle(Triangle triangle);
+	std::vector<unsigned char> rayTraceTriangle(Triangle triangle, glm::vec2 screenDim, glm::vec3 colour);
 };
