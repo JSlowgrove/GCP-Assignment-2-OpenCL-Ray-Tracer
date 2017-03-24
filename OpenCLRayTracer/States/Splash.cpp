@@ -2,7 +2,7 @@
 
 Splash::Splash(StateManager* stateManager, SDL_Renderer* renderer, glm::vec2 dimensions)
 	: State(stateManager, renderer, dimensions),
-	splash(new Texture("Assets/Images/splash.png", renderer)),
+	splash(new Texture("Assets/img/splash.png", renderer)),
 	splashTimer(new Timer(5.0f))
 {
 	//Initialise universal speed
@@ -49,5 +49,5 @@ void Splash::update(float dt)
 void Splash::draw()
 {
 	//draw the image
-	splash->pushToScreen(renderer, glm::vec2(0.0f,0.0f), glm::vec2(dimensions.x, dimensions.y));
+	splash->pushToScreen(renderer, glm::vec2(0.0f,0.0f));
 }

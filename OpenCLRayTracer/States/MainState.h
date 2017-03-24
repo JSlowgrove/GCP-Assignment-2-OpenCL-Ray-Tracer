@@ -11,6 +11,7 @@
 #include "../RayTracer/Ray.h"
 #include "../RayTracer/RayTracer.h"
 #include "../RayTracer/Triangle.h"
+#include "../RayTracer/Sphere.h"
 
 /**
 @brief A State that contains and runs the Main State.
@@ -48,11 +49,27 @@ public:
 	*/
 	void draw();
 
+	void runRayTrace(glm::vec3 colour);
+
 private:
-	///The background music.
-	//C_Music* backgroundMusic;
 	///A pointer for the universal speed of the menu.
 	float* universalSpeed;
+
 	//The Triangle
 	Triangle triangle;
+	//The Sphere
+	Sphere sphere;
+
+	//The texture to display
+	Texture* rayTrace;
+	//The background texture
+	Texture* background;
+
+	//The dimensions of the ray trace screen
+	glm::vec2 traceDim;
+	//The position of the ray trace screen
+	glm::vec2 tracePos;
+
+	//A boolean for if the ray trace is done
+	bool traced;
 };

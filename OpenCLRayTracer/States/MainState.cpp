@@ -6,8 +6,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 
 MainState::MainState(StateManager* stateManager, SDL_Renderer* renderer, glm::vec2 dimensions)
-	: State(stateManager, renderer, dimensions)/*,
-	//backgroundMusic(new C_Music("Assets/Audio/[INSERTNAME].ogg"))*/
+	: State(stateManager, renderer, dimensions)
 {
 	//Initialise universal speed
 	universalSpeed = new float(0.0f);
@@ -17,23 +16,26 @@ MainState::MainState(StateManager* stateManager, SDL_Renderer* renderer, glm::ve
 	triangle.setPointB(glm::vec3(0, 300, 0));
 	triangle.setPointC(glm::vec3(300, 300, 0));
 
-	//The colour to make the triangle
-	glm::vec3 colour = glm::vec3(0.0f, 255.0f, 255.0f);
+	//Initalise sphere
+	sphere.setCenter(glm::vec3(dimensions.x * 0.5f, dimensions.y * 0.0f, 0));
+	sphere.setRadius(250.0f);
 
-	//generate a png with a ray trace triangle
-	Utilities::generatePNG("RayTraceOutput.png", 
-		RayTracer::rayTraceTriangle(triangle, dimensions, colour), 
-		dimensions.x, dimensions.y);
+	//Initalise trace window
+	traceDim = glm::vec2(699, 409);
+	tracePos = glm::vec2(12, 157);
+
+	//Initalise the background
+	background = new Texture("Assets/img/background.png", renderer);
+
+	traced = false;
 }
 
 MainState::~MainState()
 {
-	//Stop music
-	//backgroundMusic->stopMusic();
-	//Delete audio pointers
-	//delete backgroundMusic;
 	//delete pointers
 	delete universalSpeed;
+	delete rayTrace;
+	delete background;
 }
 
 bool MainState::input()
@@ -57,6 +59,14 @@ bool MainState::input()
 
 				return false;
 				break;
+
+			case SDLK_SPACE:
+				runRayTrace(glm::vec3(0.0f, 0.0f, 255.0f));
+				break;
+
+			case SDLK_RETURN:
+				runRayTrace(glm::vec3(0.0f, 255.0f, 0.0f));
+				break;
 			}
 		}
 	}
@@ -65,10 +75,34 @@ bool MainState::input()
 
 void MainState::update(float dt)
 {
-	//Keep the music playing
-	//backgroundMusic->startMusic();
 }
 
 void MainState::draw()
 {
+	if (traced)
+	{
+		rayTrace->pushToScreen(renderer, tracePos);
+	}
+	background->pushToScreen(renderer, glm::vec2(0,0));
+}
+
+void MainState::runRayTrace(glm::vec3 colour)
+{
+	//make sure the texture is not a null pointer
+	if (rayTrace != NULL)
+	{
+		delete rayTrace;
+	}
+
+	//ray trace
+	//std::vector<unsigned char> trace = RayTracer::rayTraceTriangle(triangle, traceDim, colour);
+	std::vector<unsigned char> trace = RayTracer::rayTraceSphere(sphere, traceDim, colour);
+
+	//generate a png with a ray trace
+	Utilities::generatePNG("RayTraceOutput.png", trace, traceDim.x, traceDim.y);
+
+	//display the generated ray trace image
+	rayTrace = new Texture("RayTraceOutput.png", renderer);
+
+	traced = true;
 }

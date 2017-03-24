@@ -52,4 +52,14 @@ namespace Utilities
 			logE("encoder error " + std::to_string(error) + ": " + lodepng_error_text(error));
 		}
 	}
+
+	float normaliseFloat(float numToNorm, float minNum, float maxNum)
+	{
+		float normalisedNum;
+
+		normalisedNum = (numToNorm - minNum) / (maxNum - minNum);
+
+		return normalisedNum;
+	}
+
 }

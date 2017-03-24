@@ -56,4 +56,6 @@ namespace Utilities
 	bool rectRectIntersect(glm::vec2 PosBoxA, glm::vec2 DimBoxA, glm::vec2 PosBoxB, glm::vec2 DimBoxB);
 
 	void generatePNG(const char* filename, std::vector<unsigned char>& image, unsigned width, unsigned height);
+
+	float normaliseFloat(float numToNorm, float minNum, float maxNum);
 }

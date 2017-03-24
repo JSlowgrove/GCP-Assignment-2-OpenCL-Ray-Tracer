@@ -35,8 +35,8 @@ int main(int argc, char *argv[])
 	std::string title = "OpenCL Ray Tracer";
 
 	//Set the window and target resolutions
-	glm::vec2 targetRes = glm::vec2(1280, 720);
-	glm::vec2 windowRes = glm::vec2(1280, 720);
+	glm::vec2 targetRes = glm::vec2(720, 576);
+	glm::vec2 windowRes = glm::vec2(720, 576);
 
 	//Initialise SDL
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)

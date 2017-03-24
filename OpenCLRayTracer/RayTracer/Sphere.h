@@ -1,10 +1,22 @@
 #pragma once
 
-#include "glm/glm.hpp"
+#include <iostream>
+#include <glm/glm.hpp>
+#include <string>
 
-struct Sphere
+class Sphere
 {
-	glm::vec3 center;
+public:
+	Sphere();
+	~Sphere();
 
+	void setCenter(glm::vec3 inCenter) { center = inCenter; };
+	void setRadius(float inRad) { radius = inRad; };
+
+	glm::vec3 getCenter() { return center; };
+	float getRadius() { return radius; };
+	
+private:
+	glm::vec3 center;
 	float radius;
 };

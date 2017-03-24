@@ -4,6 +4,7 @@
 #include "glm/glm.hpp"
 #include "Ray.h"
 #include "Triangle.h"
+#include "Sphere.h"
 
 //Macros
 // Ref: http://cs.lth.se/tomas_akenine-moller
@@ -30,4 +31,7 @@ namespace RayTracer
 
 	//ray trace a triangle
 	std::vector<unsigned char> rayTraceTriangle(Triangle triangle, glm::vec2 screenDim, glm::vec3 colour);
+
+	//ray trace a sphere
+	std::vector<unsigned char> rayTraceSphere(Sphere sphere, glm::vec2 screenDim, glm::vec3 colour);
 };

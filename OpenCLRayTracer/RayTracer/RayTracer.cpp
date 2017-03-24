@@ -1,6 +1,7 @@
 #include "RayTracer.h"
 
 #include "glm/gtc/matrix_transform.hpp"
+#include "../Core/Utilities.h"
 
 //Ref: http://cs.lth.se/tomas_akenine-moller
 int RayTracer::intersectTriangle(double orig[3], double dir[3],
@@ -92,6 +93,85 @@ std::vector<unsigned char> RayTracer::rayTraceTriangle(Triangle triangle, glm::v
 			pixels.push_back(result == 1 ? colour.z : 0);
 			//alpha
 			pixels.push_back(255);
+		}
+	}
+
+	return pixels;
+}
+
+std::vector<unsigned char> RayTracer::rayTraceSphere(Sphere sphere, glm::vec2 screenDim, glm::vec3 colour) 
+{
+	std::vector<unsigned char> pixels;
+	//set the vector size to contain at least the number of pixels * 4 bytes for RGBA 
+	pixels.reserve((screenDim.x * screenDim.y) * 4);
+
+	//set the projection matrix for the ray tracer
+	glm::mat4 proj = glm::perspective(45.0f, 4.0f / 3.0f, 0.0f, 100.0f);
+
+	//loop through all the pixels
+	for (unsigned int y = 0; y < screenDim.y; y++)
+	{
+		for (unsigned int x = 0; x < screenDim.x; x++)
+		{
+			//generate the ray
+			Ray ray;
+			ray.setOrigin(glm::vec4(x, y, 0, 1));
+			ray.setDirection(proj * glm::vec4(0, 0, 1, 1));
+
+			//generate the light direction
+			glm::vec3 L = sphere.getCenter() - glm::vec3(ray.getOrigin().x, ray.getOrigin().y, ray.getOrigin().z);
+
+			//
+			float tca = glm::dot(L, glm::vec3(ray.getDirection().x, ray.getDirection().y, ray.getDirection().z));
+			
+			//check if the ray has glanced of the bounds of the sphere
+			if (tca < 0)
+			{
+				//r
+				pixels.push_back(0);
+				//g
+				pixels.push_back(0);
+				//b
+				pixels.push_back(0);
+				//alpha
+				pixels.push_back(255);
+			}
+			else
+			{
+				//check if the ray has completly missed the sphere
+				float distanceSquared = glm::dot(L, L) - (tca * tca);
+				if (distanceSquared > (sphere.getRadius() * sphere.getRadius()))
+				{
+					//r
+					pixels.push_back(0);
+					//g
+					pixels.push_back(0);
+					//b
+					pixels.push_back(0);
+					//alpha
+					pixels.push_back(255);
+				}
+				else
+				{
+					//the hit coordinate
+					float thc = sqrt((sphere.getRadius() * sphere.getRadius()) - distanceSquared);
+					float t0 = tca - thc;
+					float t1 = tca + thc;
+
+					//calculate the distance to the sphere
+					float distance = glm::distance(t0, t1);
+					distance = Utilities::normaliseFloat(distance, 0.0f, (sphere.getRadius() + sphere.getRadius()));
+
+					//r
+					pixels.push_back((int)(distance * colour.x));
+					//g					
+					pixels.push_back((int)(distance * colour.y));
+					//b
+					pixels.push_back((int)(distance * colour.z));
+					//alpha
+					pixels.push_back(255);
+				}
+			}
 		}
 	}
 
