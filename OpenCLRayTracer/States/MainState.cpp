@@ -12,27 +12,7 @@ MainState::MainState(StateManager* stateManager, SDL_Renderer* renderer, glm::ve
 	universalSpeed = new float(0.0f);
 	
 	//intialise cube
-	box = Box();
-	glm::mat4 m;
-
-	m = glm::scale(glm::mat4(1.0f), glm::vec3(50.0f, 50.0f, 50.0f));
-	for (unsigned int i = 0; i < box.getTriangleVerticies().size(); i++)
-	{
-		box.matrixMultiplyTriangleVertex(i, &m);
-	}
-	box.storeScaleNum(100.0f);
-
-	m = glm::translate(glm::mat4(1.0f), glm::vec3(150.0f, 50.0f, -150.0f));
-	for (unsigned int i = 0; i < box.getTriangleVerticies().size(); i++)
-	{
-		box.matrixMultiplyTriangleVertex(i, &m);
-	}
-
-	m = glm::rotate(m, Utilities::convertDegreeToRadian(45.0f), glm::vec3(1, 1, 0));
-	for (unsigned int i = 0; i < box.getTriangleVerticies().size(); i++)
-	{
-		box.matrixMultiplyTriangleVertex(i, &m);
-	}
+	box = Box(50.0f, glm::vec3(150.0f, 50.0f, -150.0f), 45.0f, glm::vec3(1, 1, 0));
 
 	//Initalise trace window
 	traceDim = glm::vec2(699, 409);
