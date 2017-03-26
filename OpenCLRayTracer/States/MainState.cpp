@@ -8,6 +8,9 @@
 MainState::MainState(StateManager* stateManager, SDL_Renderer* renderer, glm::vec2 dimensions)
 	: State(stateManager, renderer, dimensions)
 {
+	//initalise the loading text
+	loading = new Text("Running...", "Assets/font/isl_jupiter.ttf", 200, renderer, 255, 255, 255);
+
 	//Initialise universal speed
 	universalSpeed = new float(0.0f);
 	
@@ -64,6 +67,7 @@ bool MainState::input()
 
 			case SDLK_RETURN:
 				//CPU Render
+				drawLoading();
 				runRayTrace();
 				break;
 			}
@@ -106,4 +110,12 @@ void MainState::runRayTrace()
 	rayTrace = new Texture(outputPath, renderer);
 
 	traced = true;
+}
+
+void MainState::drawLoading()
+{
+	loading->pushToScreen(glm::vec2(65.0f, 240.0f));
+
+	//display renderer
+	SDL_RenderPresent(renderer);
 }

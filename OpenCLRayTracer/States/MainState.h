@@ -62,6 +62,9 @@ private:
 	//The background texture
 	Texture* background;
 
+	//The loading text;
+	Text* loading;
+
 	//The dimensions of the ray trace screen
 	glm::vec2 traceDim;
 	//The position of the ray trace screen
@@ -69,4 +72,6 @@ private:
 
 	//A boolean for if the ray trace is done
 	bool traced;
+
+	void drawLoading();
 };
