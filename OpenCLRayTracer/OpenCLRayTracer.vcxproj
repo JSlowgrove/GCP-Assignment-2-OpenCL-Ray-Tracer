@@ -74,8 +74,9 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\SDKs\SDL2015\include;C:\SDKs\clew\include;C:\SDKs\glm-0.9.8.4;C:\SDKs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SDKs\SDL2015\include;C:\SDKs\clewDist\include;C:\SDKs\glm-0.9.8.4;C:\SDKs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4201;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <PreprocessorDefinitions>clew_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>C:\SDKs\clewDist\lib;C:\SDKs\SDL2015\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -97,7 +98,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\SDKs\SDL2015\include;C:\SDKs\clew\include;C:\SDKs\glm-0.9.8.4;C:\SDKs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SDKs\SDL2015\include;C:\SDKs\clewDist\include;C:\SDKs\glm-0.9.8.4;C:\SDKs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>clew_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -131,6 +133,7 @@
     <ClCompile Include="ExternalLibraries\lodepng.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RayTracer\Box.cpp" />
+    <ClCompile Include="RayTracer\OpenCLManagment.cpp" />
     <ClCompile Include="RayTracer\Ray.cpp" />
     <ClCompile Include="RayTracer\RayTracer.cpp" />
     <ClCompile Include="RayTracer\Sphere.cpp" />
@@ -150,6 +153,7 @@
     <ClInclude Include="Core\Utilities.h" />
     <ClInclude Include="ExternalLibraries\lodepng.h" />
     <ClInclude Include="RayTracer\Box.h" />
+    <ClInclude Include="RayTracer\OpenCLManagment.h" />
     <ClInclude Include="RayTracer\Ray.h" />
     <ClInclude Include="RayTracer\RayTracer.h" />
     <ClInclude Include="RayTracer\Sphere.h" />

@@ -7,7 +7,6 @@
 #include "States/StateManager.h"
 #include "States/Splash.h"
 #include "States/MainState.h"
-//#include "clew.h"
 
 //The declaration of the main function
 int main(int argc, char *argv[]);
@@ -24,12 +23,6 @@ int main(int argc, char *argv[])
 	{
 		Utilities::logI(allArgs[i]);
 	}
-
-	//Initalise Clew
-// 	bool clpresent = 0 == clewInit();
-// 	if (!clpresent) {
-// 		throw std::runtime_error("OpenCL library not found");
-// 	}
 
 	//Set the window title
 	std::string title = "OpenCL Ray Tracer";

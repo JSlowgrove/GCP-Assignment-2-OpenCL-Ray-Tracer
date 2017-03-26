@@ -93,6 +93,9 @@
     <ClCompile Include="RayTracer\Box.cpp">
       <Filter>Source Files\RayTracer</Filter>
     </ClCompile>
+    <ClCompile Include="RayTracer\OpenCLManagment.cpp">
+      <Filter>Source Files\RayTracer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RayTracer\Ray.h">
@@ -144,6 +147,9 @@
       <Filter>Header Files\ExternalLibraries</Filter>
     </ClInclude>
     <ClInclude Include="RayTracer\Box.h">
+      <Filter>Header Files\RayTracer</Filter>
+    </ClInclude>
+    <ClInclude Include="RayTracer\OpenCLManagment.h">
       <Filter>Header Files\RayTracer</Filter>
     </ClInclude>
   </ItemGroup>
