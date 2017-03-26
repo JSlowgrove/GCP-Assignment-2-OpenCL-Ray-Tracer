@@ -144,7 +144,7 @@ std::vector<unsigned char> RayTracer::runRayTrace(unsigned int xLoopNum, unsigne
 	return pixels;
 }
 
-std::vector<unsigned char> RayTracer::rayTraceBoxes(std::vector<Box> boxes, glm::vec2 screenDim, glm::vec4 rayDirection)
+std::vector<unsigned char> RayTracer::rayTraceBoxes(std::vector<Box> boxes, glm::vec2 screenDim, glm::vec4 rayDirection, bool useOpenCL)
 {
 	//push all vertices and colours to single vectors
 	std::vector<glm::vec4> vertices;
@@ -166,9 +166,16 @@ std::vector<unsigned char> RayTracer::rayTraceBoxes(std::vector<Box> boxes, glm:
 		colours.push_back(glm::vec4(boxes[box].getColour(), 0));
 	}
 
-//	return runRayTrace(screenDim.x, screenDim.y, boxes.size(), rayDirection, vertices, colours);
- 	return runOpenCLRayTrace(screenDim.x, screenDim.y, boxes.size(), rayDirection, vertices, colours, 
- 		vertices.size(), colours.size());
+	if (useOpenCL)
+	{
+		return runOpenCLRayTrace(screenDim.x, screenDim.y, boxes.size(), rayDirection, vertices, colours,
+			vertices.size(), colours.size());
+	}
+	else
+	{
+		return runRayTrace(screenDim.x, screenDim.y, boxes.size(), rayDirection, vertices, colours);
+	}
+ 	
 }
 
 std::vector<unsigned char> RayTracer::runOpenCLRayTrace(unsigned int xLoopNum, unsigned int yLoopNum, unsigned int numberOfBoxes, 

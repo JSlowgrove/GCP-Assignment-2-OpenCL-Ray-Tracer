@@ -11,6 +11,7 @@
 #include "../Core/Text.h"
 #include "../RayTracer/Ray.h"
 #include "../RayTracer/RayTracer.h"
+#include "../Core/PerformanceTest.h"
 
 /**
 @brief A State that contains and runs the Main State.
@@ -48,8 +49,6 @@ public:
 	*/
 	void draw();
 
-	void runRayTrace();
-
 private:
 	///A pointer for the universal speed of the menu.
 	float* universalSpeed;
@@ -61,9 +60,17 @@ private:
 	Texture* rayTrace;
 	//The background texture
 	Texture* background;
+	//The loading screens;
+	Texture* loadingWithoutOpenCL;
+	Texture* loadingWithOpenCL;
 
-	//The loading text;
-	Text* loading;
+	///The performance tester
+	PerformanceTest* tester;
+
+	//The text
+	Text* timeText;
+	Text* helpText;
+	Text* performanceText;
 
 	//The dimensions of the ray trace screen
 	glm::vec2 traceDim;
@@ -73,5 +80,15 @@ private:
 	//A boolean for if the ray trace is done
 	bool traced;
 
-	void drawLoading();
+	void runRayTrace(bool useOpenCL);
+
+	void drawLoadingWithOpenCL();
+
+	void drawLoadingWithoutOpenCL();
+
+	std::string getTimeToDraw(float time);
+
+	void initaliseOneCube();
+	void initaliseFiveCubes();
+	void initaliseTenCubes();
 };

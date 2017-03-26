@@ -5,7 +5,6 @@
 #include <glm/glm.hpp>
 #include "Core/Utilities.h"
 #include "States/StateManager.h"
-#include "States/Splash.h"
 #include "States/MainState.h"
 
 //The declaration of the main function

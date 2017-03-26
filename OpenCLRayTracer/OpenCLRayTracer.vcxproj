@@ -139,7 +139,6 @@
     <ClCompile Include="RayTracer\Sphere.cpp" />
     <ClCompile Include="RayTracer\Triangle.cpp" />
     <ClCompile Include="States\MainState.cpp" />
-    <ClCompile Include="States\Splash.cpp" />
     <ClCompile Include="States\State.cpp" />
     <ClCompile Include="States\StateManager.cpp" />
   </ItemGroup>
@@ -159,7 +158,6 @@
     <ClInclude Include="RayTracer\Sphere.h" />
     <ClInclude Include="RayTracer\Triangle.h" />
     <ClInclude Include="States\MainState.h" />
-    <ClInclude Include="States\Splash.h" />
     <ClInclude Include="States\State.h" />
     <ClInclude Include="States\StateManager.h" />
   </ItemGroup>

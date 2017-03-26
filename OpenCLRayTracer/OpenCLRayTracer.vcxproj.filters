@@ -69,9 +69,6 @@
     <ClCompile Include="States\MainState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
-    <ClCompile Include="States\Splash.cpp">
-      <Filter>Source Files\States</Filter>
-    </ClCompile>
     <ClCompile Include="States\State.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
@@ -121,9 +118,6 @@
     </ClInclude>
     <ClInclude Include="Core\Utilities.h">
       <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="States\Splash.h">
-      <Filter>Header Files\States</Filter>
     </ClInclude>
     <ClInclude Include="States\MainState.h">
       <Filter>Header Files\States</Filter>

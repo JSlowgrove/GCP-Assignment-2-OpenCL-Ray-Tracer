@@ -29,7 +29,7 @@ namespace RayTracer
 
 	int rayTriangleIntersect(glm::vec4& rayOrigin, glm::vec4& rayDirection, 
 		glm::vec4& a, glm::vec4& b, glm::vec4& c, glm::vec4& intersectionPoint, float& distance);
-	std::vector<unsigned char> rayTraceBoxes(std::vector<Box> boxes, glm::vec2 screenDim, glm::vec4 rayDirection);
+	std::vector<unsigned char> rayTraceBoxes(std::vector<Box> boxes, glm::vec2 screenDim, glm::vec4 rayDirection, bool useOpenCL);
 	std::vector<unsigned char> runRayTrace(unsigned int xLoopNum, unsigned int yLoopNum, unsigned int numberOfBoxes, glm::vec4 rayDirection,
 		std::vector<glm::vec4> vertices, std::vector<glm::vec4> colours);
 	std::vector<unsigned char> runOpenCLRayTrace(unsigned int xLoopNum, unsigned int yLoopNum, unsigned int numberOfBoxes, glm::vec4 rayDirection,
