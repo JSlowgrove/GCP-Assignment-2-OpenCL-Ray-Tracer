@@ -58,4 +58,10 @@ namespace Utilities
 	void generatePNG(const char* filename, std::vector<unsigned char>& image, unsigned width, unsigned height);
 
 	float normaliseFloat(float numToNorm, float minNum, float maxNum);
+
+	/**
+	@brief Gets the current date and time in the form of a string.
+	@returns The current date and time.
+	*/
+	std::string getCurrentDateAndTime();
 }

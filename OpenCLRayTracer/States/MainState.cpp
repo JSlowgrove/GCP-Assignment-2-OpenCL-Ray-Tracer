@@ -10,16 +10,8 @@ MainState::MainState(StateManager* stateManager, SDL_Renderer* renderer, glm::ve
 {
 	//Initialise universal speed
 	universalSpeed = new float(0.0f);
-
-	//Initalise triangle
-	//triangle.setPointA(glm::vec3(150, 0, -200));
-	//triangle.setPointB(glm::vec3(0, 300, 0));
-	//triangle.setPointC(glm::vec3(300, 300, -200));
-
-	//Initalise sphere
-	//sphere.setCenter(glm::vec3(dimensions.x * 0.5f, dimensions.y * 0.0f, 0));
-	//sphere.setRadius(250.0f);
-
+	
+	//intialise cube
 	box = Box();
 	glm::mat4 m;
 
@@ -117,15 +109,16 @@ void MainState::runRayTrace(glm::vec3 colour)
 	}
 
 	//ray trace
-	//std::vector<unsigned char> trace = RayTracer::rayTraceTriangle(triangle, traceDim, colour);
-	//std::vector<unsigned char> trace = RayTracer::rayTraceSphere(sphere, traceDim, colour);
 	std::vector<unsigned char> trace = RayTracer::rayTraceBox(box, traceDim, colour);
 
+	//ray trace output path
+	std::string outputPath = "RayTraceOutput/RayTraceOutput[" + Utilities::getCurrentDateAndTime() + ".png";
+
 	//generate a png with a ray trace
-	Utilities::generatePNG("RayTraceOutput.png", trace, traceDim.x, traceDim.y);
+	Utilities::generatePNG(outputPath.c_str(), trace, traceDim.x, traceDim.y);
 
 	//display the generated ray trace image
-	rayTrace = new Texture("RayTraceOutput.png", renderer);
+	rayTrace = new Texture(outputPath, renderer);
 
 	traced = true;
 }

@@ -1,6 +1,7 @@
 #include "Utilities.h"
 
 #include "../ExternalLibraries/lodepng.h"
+#include <time.h>
 
 namespace Utilities
 {
@@ -61,6 +62,34 @@ namespace Utilities
 		normalisedNum = (numToNorm - minNum) / (maxNum - minNum);
 
 		return normalisedNum;
+	}
+
+	std::string getCurrentDateAndTime()
+	{
+		//Get date/time based on current system
+		time_t currentDateTime = time(NULL);
+
+		//Convert to C-String
+		char str[26];
+		ctime_s(str, sizeof str, &currentDateTime);
+
+		for (unsigned int i = 0; i < 26; i++)
+		{
+			if (str[i] == ' ')
+			{
+				str[i] = '_';
+			}
+			else if (str[i] == ':')
+			{
+				str[i] = '-';
+			}
+			else if (str[i] == '\n')
+			{
+				str[i] = ']';
+			}
+		}
+
+		return std::string(str);
 	}
 
 }
