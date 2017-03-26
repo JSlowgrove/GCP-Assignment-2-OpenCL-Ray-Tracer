@@ -1,6 +1,7 @@
 /docs
 Documentation.lnk
-/OpenCLRayTracer/Assets
+/OpenCLRayTracer/Assets/font
+/OpenCLRayTracer/Assets/img
 /OpenCLRayTracer/Debug
 /Debug/OpenCLRayTracer.pdb
 /Debug/OpenCLRayTracer.exe

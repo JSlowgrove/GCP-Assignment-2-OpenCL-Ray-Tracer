@@ -27,11 +27,13 @@ namespace RayTracer
 		double vert0[3], double vert1[3], double vert2[3],
 		double *t, double *u, double *v);
 
-	int rayTriangleIntersect(glm::vec3& rayOrigin, glm::vec3& rayDirection, 
-		glm::vec4& a, glm::vec4& b, glm::vec4& c, glm::vec3& intersectionPoint, float& distance);
-	std::vector<unsigned char> rayTraceBoxes(std::vector<Box> boxes, glm::vec2 screenDim, glm::vec3 rayDirection);
-	std::vector<unsigned char> runRayTrace(unsigned int xLoopNum, unsigned int yLoopNum, unsigned int numberOfBoxes, glm::vec3 rayDirection,
-		glm::vec4 vertices[], glm::vec3 colours[]);
+	int rayTriangleIntersect(glm::vec4& rayOrigin, glm::vec4& rayDirection, 
+		glm::vec4& a, glm::vec4& b, glm::vec4& c, glm::vec4& intersectionPoint, float& distance);
+	std::vector<unsigned char> rayTraceBoxes(std::vector<Box> boxes, glm::vec2 screenDim, glm::vec4 rayDirection);
+	std::vector<unsigned char> runRayTrace(unsigned int xLoopNum, unsigned int yLoopNum, unsigned int numberOfBoxes, glm::vec4 rayDirection,
+		std::vector<glm::vec4> vertices, std::vector<glm::vec4> colours);
+	std::vector<unsigned char> runOpenCLRayTrace(unsigned int xLoopNum, unsigned int yLoopNum, unsigned int numberOfBoxes, glm::vec4 rayDirection,
+		std::vector<glm::vec4> vertices, std::vector<glm::vec4> colours, int numOfVerts, int numOfColours);
 
 // 	//A function to test for a ray triangle intersection
 // 	int rayTriangleIntersect(Ray& ray, Triangle& triangle, glm::vec3& intersectionPoint);

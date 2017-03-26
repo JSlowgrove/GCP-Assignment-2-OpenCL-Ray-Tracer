@@ -101,7 +101,7 @@ void MainState::runRayTrace()
 	glm::mat4 proj = glm::perspective(45.0f, 4.0f / 3.0f, 0.0f, 100.0f);
 
 	//generate the ray directions
-	glm::vec3 rayDirection = glm::vec3(proj * glm::vec4(0, 0, 1, 1));
+	glm::vec4 rayDirection = glm::vec4(proj * glm::vec4(0, 0, 1, 1));
 
 	//ray trace
 	std::vector<unsigned char> trace = RayTracer::rayTraceBoxes(boxes, traceDim, rayDirection);

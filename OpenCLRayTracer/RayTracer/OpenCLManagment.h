@@ -7,8 +7,8 @@
 #include <stdlib.h>
 #include <iostream>
 #include "clew.h"
+#include "glm/glm.hpp"
 
-#define MEM_SIZE (128)
 #define MAX_SOURCE_SIZE (0x100000)
 
 /**
@@ -24,5 +24,9 @@ namespace OpenCLManagment
 	*/
 	std::string loadOpenCLFile(std::string fileName);
 
-	int runOpenCL();
+	std::vector<int> runOpenCLRayTrace(unsigned int numberOfBoxes, glm::vec4 rayDirection,
+		std::vector<glm::vec4> vertices, std::vector<glm::vec4> colours, std::vector<glm::vec4> rayOrigins, int verticiesSize,
+		int coloursSize, int originsSize, int numberOfRays);
+
+	//int runOpenCLHelloWorld();
 }

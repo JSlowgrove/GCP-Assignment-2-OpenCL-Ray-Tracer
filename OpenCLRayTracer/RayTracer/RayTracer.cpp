@@ -2,6 +2,7 @@
 
 #include "glm/gtc/matrix_transform.hpp"
 #include "../Core/Utilities.h"
+#include "OpenCLManagment.h"
 
 //Ref: http://cs.lth.se/tomas_akenine-moller
 int RayTracer::intersectTriangle(double orig[3], double dir[3],
@@ -47,8 +48,8 @@ int RayTracer::intersectTriangle(double orig[3], double dir[3],
 	return 1;
 }
 
-int RayTracer::rayTriangleIntersect(glm::vec3& rayOriginIn, glm::vec3& rayDirectionIn, glm::vec4& a, glm::vec4& b, glm::vec4& c,
-	glm::vec3& intersectionPoint, float& dist)
+int RayTracer::rayTriangleIntersect(glm::vec4& rayOriginIn, glm::vec4& rayDirectionIn, glm::vec4& a, glm::vec4& b, glm::vec4& c,
+	glm::vec4& intersectionPoint, float& dist)
 {
 	double rayOrigin[3]{ rayOriginIn.x, rayOriginIn.y, rayOriginIn.z };
 	double rayDirection[3]{ rayDirectionIn.x, rayDirectionIn.y, rayDirectionIn.z };
@@ -74,8 +75,8 @@ int RayTracer::rayTriangleIntersect(glm::vec3& rayOriginIn, glm::vec3& rayDirect
 	return result;
 }
 
-std::vector<unsigned char> RayTracer::runRayTrace(unsigned int xLoopNum, unsigned int yLoopNum, unsigned int numberOfBoxes, glm::vec3 rayDirection,
-	glm::vec4 vertices[], glm::vec3 colours[])
+std::vector<unsigned char> RayTracer::runRayTrace(unsigned int xLoopNum, unsigned int yLoopNum, unsigned int numberOfBoxes, glm::vec4 rayDirection,
+	std::vector<glm::vec4> vertices, std::vector<glm::vec4> colours)
 {
 	std::vector<unsigned char> pixels;
 	//set the vector size to contain at least the number of pixels * 4 bytes for RGBA 
@@ -87,9 +88,9 @@ std::vector<unsigned char> RayTracer::runRayTrace(unsigned int xLoopNum, unsigne
 		for (unsigned int x = 0; x < xLoopNum; x++)
 		{
 			//generate the ray
-			glm::vec3 rayOrigin = glm::vec3(x, y, 0);
+			glm::vec4 rayOrigin = glm::vec4(x, y, 0, 0);
 
-			glm::vec3 intersectionPoint;
+			glm::vec4 intersectionPoint;
 			float dist;
 
 			float closestPoint = -1000.0f;
@@ -143,11 +144,11 @@ std::vector<unsigned char> RayTracer::runRayTrace(unsigned int xLoopNum, unsigne
 	return pixels;
 }
 
-std::vector<unsigned char> RayTracer::rayTraceBoxes(std::vector<Box> boxes, glm::vec2 screenDim, glm::vec3 rayDirection)
+std::vector<unsigned char> RayTracer::rayTraceBoxes(std::vector<Box> boxes, glm::vec2 screenDim, glm::vec4 rayDirection)
 {
 	//push all vertices and colours to single vectors
 	std::vector<glm::vec4> vertices;
-	std::vector<glm::vec3> colours;
+	std::vector<glm::vec4> colours;
 
 	int index = 0;
 	//loop through all of the boxes
@@ -162,10 +163,45 @@ std::vector<unsigned char> RayTracer::rayTraceBoxes(std::vector<Box> boxes, glm:
 			vertices.push_back(boxes[box].getTriangleVerticies()[index + 2]);
 			index += 3;
 		}
-		colours.push_back(boxes[box].getColour());
+		colours.push_back(glm::vec4(boxes[box].getColour(), 0));
 	}
 
-	return runRayTrace(screenDim.x, screenDim.y, boxes.size(), rayDirection, &vertices[0], &colours[0]);
+//	return runRayTrace(screenDim.x, screenDim.y, boxes.size(), rayDirection, vertices, colours);
+ 	return runOpenCLRayTrace(screenDim.x, screenDim.y, boxes.size(), rayDirection, vertices, colours, 
+ 		vertices.size(), colours.size());
+}
+
+std::vector<unsigned char> RayTracer::runOpenCLRayTrace(unsigned int xLoopNum, unsigned int yLoopNum, unsigned int numberOfBoxes, 
+	glm::vec4 rayDirection, std::vector<glm::vec4> vertices, std::vector<glm::vec4> colours, int numOfVerts, int numOfColours)
+{
+	std::vector<unsigned char> pixels;
+	//set the vector size to contain at least the number of pixels * 4 bytes for RGBA 
+	pixels.reserve((xLoopNum * yLoopNum) * 4);
+
+	std::vector<glm::vec4> rayOrigins;
+
+	//loop through all the pixels
+	for (unsigned int y = 0; y < yLoopNum; y++)
+	{
+		for (unsigned int x = 0; x < xLoopNum; x++)
+		{
+			//generate the ray
+			rayOrigins.push_back(glm::vec4(x, y, 0, 0));
+		}
+	}
+
+	//send to opencl and get back pixels in int array
+	std::vector<int> returnedPixels;
+	returnedPixels = OpenCLManagment::runOpenCLRayTrace(numberOfBoxes, rayDirection, vertices, colours, rayOrigins,
+		numOfVerts, numOfColours, rayOrigins.size(), xLoopNum * yLoopNum);
+
+	//convert to char array
+	for (unsigned int i = 0; i < returnedPixels.size(); i++)
+	{
+		pixels.push_back((char)returnedPixels[i]);
+	}
+
+	return pixels;
 }
 
 // int RayTracer::rayTriangleIntersect(Ray& ray, Triangle& triangle, glm::vec3& intersectionPoint)
