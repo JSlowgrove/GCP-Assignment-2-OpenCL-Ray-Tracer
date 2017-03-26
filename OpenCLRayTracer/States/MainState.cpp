@@ -12,13 +12,35 @@ MainState::MainState(StateManager* stateManager, SDL_Renderer* renderer, glm::ve
 	universalSpeed = new float(0.0f);
 
 	//Initalise triangle
-	triangle.setPointA(glm::vec3(150, 0, 0));
-	triangle.setPointB(glm::vec3(0, 300, 0));
-	triangle.setPointC(glm::vec3(300, 300, 0));
+	//triangle.setPointA(glm::vec3(150, 0, -200));
+	//triangle.setPointB(glm::vec3(0, 300, 0));
+	//triangle.setPointC(glm::vec3(300, 300, -200));
 
 	//Initalise sphere
-	sphere.setCenter(glm::vec3(dimensions.x * 0.5f, dimensions.y * 0.0f, 0));
-	sphere.setRadius(250.0f);
+	//sphere.setCenter(glm::vec3(dimensions.x * 0.5f, dimensions.y * 0.0f, 0));
+	//sphere.setRadius(250.0f);
+
+	box = Box();
+	glm::mat4 m;
+
+	m = glm::scale(glm::mat4(1.0f), glm::vec3(50.0f, 50.0f, 50.0f));
+	for (unsigned int i = 0; i < box.getTriangleVerticies().size(); i++)
+	{
+		box.matrixMultiplyTriangleVertex(i, &m);
+	}
+	box.storeScaleNum(100.0f);
+
+	m = glm::translate(glm::mat4(1.0f), glm::vec3(150.0f, 50.0f, -150.0f));
+	for (unsigned int i = 0; i < box.getTriangleVerticies().size(); i++)
+	{
+		box.matrixMultiplyTriangleVertex(i, &m);
+	}
+
+	m = glm::rotate(m, Utilities::convertDegreeToRadian(45.0f), glm::vec3(1, 1, 0));
+	for (unsigned int i = 0; i < box.getTriangleVerticies().size(); i++)
+	{
+		box.matrixMultiplyTriangleVertex(i, &m);
+	}
 
 	//Initalise trace window
 	traceDim = glm::vec2(699, 409);
@@ -96,7 +118,8 @@ void MainState::runRayTrace(glm::vec3 colour)
 
 	//ray trace
 	//std::vector<unsigned char> trace = RayTracer::rayTraceTriangle(triangle, traceDim, colour);
-	std::vector<unsigned char> trace = RayTracer::rayTraceSphere(sphere, traceDim, colour);
+	//std::vector<unsigned char> trace = RayTracer::rayTraceSphere(sphere, traceDim, colour);
+	std::vector<unsigned char> trace = RayTracer::rayTraceBox(box, traceDim, colour);
 
 	//generate a png with a ray trace
 	Utilities::generatePNG("RayTraceOutput.png", trace, traceDim.x, traceDim.y);

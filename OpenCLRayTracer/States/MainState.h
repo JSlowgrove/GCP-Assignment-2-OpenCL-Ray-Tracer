@@ -11,7 +11,7 @@
 #include "../RayTracer/Ray.h"
 #include "../RayTracer/RayTracer.h"
 #include "../RayTracer/Triangle.h"
-#include "../RayTracer/Sphere.h"
+//#include "../RayTracer/Sphere.h"
 
 /**
 @brief A State that contains and runs the Main State.
@@ -56,9 +56,11 @@ private:
 	float* universalSpeed;
 
 	//The Triangle
-	Triangle triangle;
+	//Triangle triangle;
 	//The Sphere
-	Sphere sphere;
+	//Sphere sphere;
+	//The Box
+	Box box;
 
 	//The texture to display
 	Texture* rayTrace;

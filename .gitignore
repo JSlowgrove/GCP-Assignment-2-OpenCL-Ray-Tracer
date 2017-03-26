@@ -8,3 +8,5 @@ Documentation.lnk
 /Debug/Assets
 /regenDocs.bat
 /OpenCLRayTracer/RayTraceOutput.png
+/Release
+/OpenCLRayTracer/Release

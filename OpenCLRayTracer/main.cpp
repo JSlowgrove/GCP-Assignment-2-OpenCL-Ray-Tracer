@@ -64,26 +64,12 @@ int main(int argc, char *argv[])
 	//Time Check
 	unsigned int lastTime = SDL_GetTicks();
 
-
-#if !defined(_DEBUG)
-
-	//Create Window
-	Vec2 windowPos = Vec2(0, 0);
-	SDL_Window *window = SDL_CreateWindow(title.c_str(),
-		(int)windowPos.x, (int)windowPos.y,
-		(int)windowRes.x, (int)windowRes.y,
-		SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN_DESKTOP);
-
-#else
-
 	//Create Window
 	glm::vec2 windowPos = glm::vec2(40, 40);
 	SDL_Window *window = SDL_CreateWindow(title.c_str(),
 		(int)windowPos.x, (int)windowPos.y,
 		(int)windowRes.x, (int)windowRes.y,
 		SDL_WINDOW_SHOWN);
-
-#endif	
 
 	//Create Renderer from the window
 	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
@@ -94,12 +80,7 @@ int main(int argc, char *argv[])
 	
 	//Setup state manager and initial state
 	StateManager * stateManager = new StateManager();
-
-#if !defined(_DEBUG)
-	stateManager->addState(new Splash(stateManager, renderer, targetRes));
-#else
 	stateManager->addState(new MainState(stateManager, renderer, targetRes));
-#endif
 
 	//Start Game Loop
 	bool go = true;

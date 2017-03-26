@@ -5,6 +5,7 @@
 #include "Ray.h"
 #include "Triangle.h"
 #include "Sphere.h"
+#include "Box.h"
 
 //Macros
 // Ref: http://cs.lth.se/tomas_akenine-moller
@@ -27,11 +28,18 @@ namespace RayTracer
 		double *t, double *u, double *v);
 
 	//A function to test for a ray triangle intersection
-	int rayTriangleIntersect(Ray& ray, Triangle& triangle);
+	int rayTriangleIntersect(Ray& ray, Triangle& triangle, glm::vec3& intersectionPoint);
 
+	int rayTriangleIntersect(Ray& ray, glm::vec4& a, glm::vec4& b, glm::vec4& c, glm::vec3& intersectionPoint, float& distance);
 	//ray trace a triangle
-	std::vector<unsigned char> rayTraceTriangle(Triangle triangle, glm::vec2 screenDim, glm::vec3 colour);
+	std::vector<unsigned char> rayTrace2DTriangle(Triangle triangle, glm::vec2 screenDim, glm::vec3 colour);
 
 	//ray trace a sphere
 	std::vector<unsigned char> rayTraceSphere(Sphere sphere, glm::vec2 screenDim, glm::vec3 colour);
+
+	//ray trace a box
+	std::vector<unsigned char> rayTraceBox(Box box, glm::vec2 screenDim, glm::vec3 colour);
+
+	//ray trace a triangle
+	int rayTriangleIntersect(Ray& ray, glm::vec4& a, glm::vec4& b, glm::vec4& c, glm::vec3& intersectionPoint);
 };

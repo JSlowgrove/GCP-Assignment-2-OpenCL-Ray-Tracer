@@ -57,6 +57,7 @@ namespace Utilities
 	{
 		float normalisedNum;
 
+		//normalise the number using the min and max value
 		normalisedNum = (numToNorm - minNum) / (maxNum - minNum);
 
 		return normalisedNum;
