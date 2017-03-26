@@ -97,8 +97,15 @@ void MainState::runRayTrace()
 		delete rayTrace;
 	}
 
+	//set the projection matrix for the ray tracer
+	glm::mat4 proj = glm::perspective(45.0f, 4.0f / 3.0f, 0.0f, 100.0f);
+
+	//generate the ray directions
+	glm::vec3 rayDirection = glm::vec3(proj * glm::vec4(0, 0, 1, 1));
+
 	//ray trace
-	std::vector<unsigned char> trace = RayTracer::rayTraceBoxes(boxes, traceDim);
+	std::vector<unsigned char> trace = RayTracer::rayTraceBoxes(boxes, traceDim, rayDirection);
+	Utilities::logI("Box Ray Trace Ran");
 
 	//ray trace output path
 	std::string outputPath = "RayTraceOutput/RayTraceOutput[" + Utilities::getCurrentDateAndTime() + ".png";

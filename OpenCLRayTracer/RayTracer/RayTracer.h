@@ -27,21 +27,27 @@ namespace RayTracer
 		double vert0[3], double vert1[3], double vert2[3],
 		double *t, double *u, double *v);
 
-	//A function to test for a ray triangle intersection
-	int rayTriangleIntersect(Ray& ray, Triangle& triangle, glm::vec3& intersectionPoint);
+	int rayTriangleIntersect(glm::vec3& rayOrigin, glm::vec3& rayDirection, 
+		glm::vec4& a, glm::vec4& b, glm::vec4& c, glm::vec3& intersectionPoint, float& distance);
+	std::vector<unsigned char> rayTraceBoxes(std::vector<Box> boxes, glm::vec2 screenDim, glm::vec3 rayDirection);
+	std::vector<unsigned char> runRayTrace(unsigned int xLoopNum, unsigned int yLoopNum, unsigned int numberOfBoxes, glm::vec3 rayDirection,
+		glm::vec4 vertices[], glm::vec3 colours[]);
 
-	int rayTriangleIntersect(Ray& ray, glm::vec4& a, glm::vec4& b, glm::vec4& c, glm::vec3& intersectionPoint, float& distance);
-
-	std::vector<unsigned char> rayTraceBoxes(std::vector<Box> boxes, glm::vec2 screenDim);
-	//ray trace a triangle
-	std::vector<unsigned char> rayTrace2DTriangle(Triangle triangle, glm::vec2 screenDim, glm::vec3 colour);
-
-	//ray trace a sphere
-	std::vector<unsigned char> rayTraceSphere(Sphere sphere, glm::vec2 screenDim, glm::vec3 colour);
-
-	//ray trace a box
-	std::vector<unsigned char> rayTraceBox(Box box, glm::vec2 screenDim, glm::vec3 colour);
-
-	//ray trace a triangle
-	int rayTriangleIntersect(Ray& ray, glm::vec4& a, glm::vec4& b, glm::vec4& c, glm::vec3& intersectionPoint);
+// 	//A function to test for a ray triangle intersection
+// 	int rayTriangleIntersect(Ray& ray, Triangle& triangle, glm::vec3& intersectionPoint);
+// 
+// 	//ray trace a triangle
+// 	std::vector<unsigned char> rayTrace2DTriangle(Triangle triangle, glm::vec2 screenDim, glm::vec3 colour);
+// 
+// 	//ray trace a sphere
+// 	std::vector<unsigned char> rayTraceSphere(Sphere sphere, glm::vec2 screenDim, glm::vec3 colour);
+// 
+// 	//ray trace a box
+// 	std::vector<unsigned char> rayTraceBox(Box box, glm::vec2 screenDim, glm::vec3 colour);
+// 
+// 	//ray trace a triangle
+// 	int rayTriangleIntersect(Ray& ray, glm::vec4& a, glm::vec4& b, glm::vec4& c, glm::vec3& intersectionPoint);
+// 
+// 	int rayTriangleIntersect(Ray& ray, glm::vec4& a, glm::vec4& b, glm::vec4& c, glm::vec3& intersectionPoint, float& distance);
+// 	std::vector<unsigned char> rayTraceBoxes(std::vector<Box> boxes, glm::vec2 screenDim);
 };
