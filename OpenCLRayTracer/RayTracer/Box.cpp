@@ -7,6 +7,9 @@ Box::Box()
 {
 	//generate triangles
 	generateBoxTriangles();
+
+	//initalise colour to white
+	colour = glm::vec3(255.0f, 255.0f, 255.0f);
 }
 
 Box::Box(float inScale, glm::vec3 translation, float angle, glm::vec3 axis)
@@ -18,6 +21,9 @@ Box::Box(float inScale, glm::vec3 translation, float angle, glm::vec3 axis)
 	scaleBox(inScale);
 	translateBox(translation);
 	rotateBox(angle, axis);
+
+	//initalise colour to white
+	colour = glm::vec3(255.0f, 255.0f, 255.0f);
 }
 
 Box::~Box()

@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include <iostream>
+#include <vector>
 #include "State.h"
 #include "StateManager.h"
 #include "../Core/Texture.h"
@@ -10,8 +11,6 @@
 #include "../Core/Text.h"
 #include "../RayTracer/Ray.h"
 #include "../RayTracer/RayTracer.h"
-#include "../RayTracer/Triangle.h"
-//#include "../RayTracer/Sphere.h"
 
 /**
 @brief A State that contains and runs the Main State.
@@ -49,18 +48,14 @@ public:
 	*/
 	void draw();
 
-	void runRayTrace(glm::vec3 colour);
+	void runRayTrace();
 
 private:
 	///A pointer for the universal speed of the menu.
 	float* universalSpeed;
 
-	//The Triangle
-	//Triangle triangle;
-	//The Sphere
-	//Sphere sphere;
-	//The Box
-	Box box;
+	//The Boxes
+	std::vector<Box> boxes;
 
 	//The texture to display
 	Texture* rayTrace;

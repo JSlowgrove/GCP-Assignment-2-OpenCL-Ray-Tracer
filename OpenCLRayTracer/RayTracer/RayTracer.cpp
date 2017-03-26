@@ -322,3 +322,80 @@ int RayTracer::rayTriangleIntersect(Ray& ray, glm::vec4& a, glm::vec4& b, glm::v
 
 	return result;
 }
+
+std::vector<unsigned char> RayTracer::rayTraceBoxes(std::vector<Box> boxes, glm::vec2 screenDim)
+{
+	std::vector<unsigned char> pixels;
+	//set the vector size to contain at least the number of pixels * 4 bytes for RGBA 
+	pixels.reserve((screenDim.x * screenDim.y) * 4);
+
+	//set the projection matrix for the ray tracer
+	glm::mat4 proj = glm::perspective(45.0f, 4.0f / 3.0f, 0.0f, 100.0f);
+
+	//loop through all the pixels
+	for (unsigned int y = 0; y < screenDim.y; y++)
+	{
+		for (unsigned int x = 0; x < screenDim.x; x++)
+		{
+			//generate the ray
+			Ray ray;
+			ray.setOrigin(glm::vec3(x, y, 0));
+			ray.setDirection(glm::vec3(proj * glm::vec4(0, 0, 1, 1)));
+
+			glm::vec3 intersectionPoint;
+			float dist;
+
+			float closestPoint = -1000.0f;
+			glm::vec3 closestColour = glm::vec3(0.0f ,0.0f, 0.0f);
+			int result = 0;
+
+			int index = 0;
+
+			//loop through all of the boxes
+			for (unsigned int box = 0; box < boxes.size(); box++)
+			{
+				index = 0;
+				//loop through all the triangles in the box
+				for (int i = 0; i < 12; i++)
+				{
+					//ray trace the triangle
+					if (RayTracer::rayTriangleIntersect(ray, boxes[box].getTriangleVerticies()[index],
+						boxes[box].getTriangleVerticies()[index + 1], boxes[box].getTriangleVerticies()[index + 2], 
+						intersectionPoint, dist) == 1)
+					{
+						result = 1;
+
+						//check if this point is closer
+						if (dist > closestPoint)
+						{
+							closestPoint = dist;
+							closestColour = boxes[box].getColour();
+						}
+					}
+
+					index += 3;
+				}
+			}			
+
+			float colourDist = Utilities::normaliseFloat(closestPoint, 0.0f, 300.0f);
+
+			if (colourDist < 0.0f)
+			{
+				colourDist = 0.0f;
+			}
+
+			//r
+			pixels.push_back(colourDist * closestColour.x);
+			//g					
+			pixels.push_back(colourDist * closestColour.y);
+			//b
+			pixels.push_back(colourDist * closestColour.z);
+			//alpha
+			pixels.push_back(255);
+		}
+	}
+
+	Utilities::logI("Box Ray Trace Ran");
+
+	return pixels;
+}

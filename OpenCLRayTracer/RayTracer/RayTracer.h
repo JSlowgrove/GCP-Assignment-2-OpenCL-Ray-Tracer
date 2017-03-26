@@ -31,6 +31,8 @@ namespace RayTracer
 	int rayTriangleIntersect(Ray& ray, Triangle& triangle, glm::vec3& intersectionPoint);
 
 	int rayTriangleIntersect(Ray& ray, glm::vec4& a, glm::vec4& b, glm::vec4& c, glm::vec3& intersectionPoint, float& distance);
+
+	std::vector<unsigned char> rayTraceBoxes(std::vector<Box> boxes, glm::vec2 screenDim);
 	//ray trace a triangle
 	std::vector<unsigned char> rayTrace2DTriangle(Triangle triangle, glm::vec2 screenDim, glm::vec3 colour);
 

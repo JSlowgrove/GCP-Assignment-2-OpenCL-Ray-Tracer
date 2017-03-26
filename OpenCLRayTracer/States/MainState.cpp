@@ -12,7 +12,10 @@ MainState::MainState(StateManager* stateManager, SDL_Renderer* renderer, glm::ve
 	universalSpeed = new float(0.0f);
 	
 	//intialise cube
-	box = Box(50.0f, glm::vec3(150.0f, 50.0f, -150.0f), 45.0f, glm::vec3(1, 1, 0));
+	boxes.push_back(Box(50.0f, glm::vec3(150.0f, 50.0f, -200.0f), 45.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(0.0f, 0.0f, 255.0f));
+	boxes.push_back(Box(50.0f, glm::vec3(250.0f, 50.0f, -200.0f), 45.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(0.0f, 255.0f, 0.0f));
 
 	//Initalise trace window
 	traceDim = glm::vec2(699, 409);
@@ -55,11 +58,13 @@ bool MainState::input()
 				break;
 
 			case SDLK_SPACE:
-				runRayTrace(glm::vec3(0.0f, 0.0f, 255.0f));
+				//OpenCL Render
+				//runRayTrace();
 				break;
 
 			case SDLK_RETURN:
-				runRayTrace(glm::vec3(0.0f, 255.0f, 0.0f));
+				//CPU Render
+				runRayTrace();
 				break;
 			}
 		}
@@ -80,7 +85,7 @@ void MainState::draw()
 	background->pushToScreen(renderer, glm::vec2(0,0));
 }
 
-void MainState::runRayTrace(glm::vec3 colour)
+void MainState::runRayTrace()
 {
 	//make sure the texture is not a null pointer
 	if (rayTrace != NULL)
@@ -89,7 +94,7 @@ void MainState::runRayTrace(glm::vec3 colour)
 	}
 
 	//ray trace
-	std::vector<unsigned char> trace = RayTracer::rayTraceBox(box, traceDim, colour);
+	std::vector<unsigned char> trace = RayTracer::rayTraceBoxes(boxes, traceDim);
 
 	//ray trace output path
 	std::string outputPath = "RayTraceOutput/RayTraceOutput[" + Utilities::getCurrentDateAndTime() + ".png";
