@@ -16,9 +16,6 @@ MainState::MainState(StateManager* stateManager, SDL_Renderer* renderer, glm::ve
 
 	//Initialise universal speed
 	universalSpeed = new float(0.0f);
-	
-	//intialise cube
-	initaliseTenCubes();
 
 	//Initalise trace window
 	traceDim = glm::vec2(699, 409);
@@ -28,14 +25,27 @@ MainState::MainState(StateManager* stateManager, SDL_Renderer* renderer, glm::ve
 	timeText = new Text("Time Taken: ", "Assets/font/isl_jupiter.ttf", 60, renderer, 255, 255, 255);
 	helpText = new Text("Press H for help", "Assets/font/isl_jupiter.ttf", 40, renderer, 0, 255, 0);
 	performanceText = new Text("0 ms", "Assets/font/isl_jupiter.ttf", 60, renderer, 255, 255, 255);
+	numberOfCubesInSceneText = new Text("Number of Cubes in Scene: ", "Assets/font/isl_jupiter.ttf", 60, renderer, 255, 255, 255);
+	numberOfCubesInScene = new Text("1", "Assets/font/isl_jupiter.ttf", 60, renderer, 255, 255, 255);
 
 	//Initalise the background
 	background = new Texture("Assets/img/background.png", renderer);
+
+	//Initalise help image
+	helpImage = new Texture("Assets/img/help.png", renderer);
 
 	traced = false;
 
 	//initialise the performance tester
 	tester = new PerformanceTest();
+
+	//initalise the scene number to 1;
+	sceneNumber = 1;
+
+	help = false;
+
+	//intialise cube
+	initaliseOneCube();
 }
 
 MainState::~MainState()
@@ -48,6 +58,10 @@ MainState::~MainState()
 	delete loadingWithoutOpenCL;
 	delete timeText;
 	delete helpText;
+	delete numberOfCubesInScene;
+	delete numberOfCubesInSceneText;
+	delete helpImage;
+
 }
 
 bool MainState::input()
@@ -73,20 +87,69 @@ bool MainState::input()
 				break;
 
 			case SDLK_SPACE:
-				//OpenCL Render
-				drawLoadingWithoutOpenCL();
-				tester->testStart();
-				runRayTrace(false);
-				performanceText->setText(getTimeToDraw(tester->testFinish() * 0.001f) + "ms");
+				if (!help)
+				{
+					//OpenCL Render
+					drawLoadingWithoutOpenCL();
+					tester->testStart();
+					runRayTrace(false);
+					performanceText->setText(getTimeToDraw(tester->testFinish() * 0.001f) + "ms");
+				}
 				break;
 
 			case SDLK_RETURN:
-				//CPU Render
-				drawLoadingWithOpenCL();
-				tester->testStart();
-				runRayTrace(true);
-				performanceText->setText(getTimeToDraw(tester->testFinish() * 0.001f) + "ms");
+				if (!help)
+				{
+					//CPU Render
+					drawLoadingWithOpenCL();
+					tester->testStart();
+					runRayTrace(true);
+					performanceText->setText(getTimeToDraw(tester->testFinish() * 0.001f) + "ms");
+				}				
 				break;
+
+			case SDLK_1:
+				if (!help)
+				{
+					//scene 1
+					boxes.clear();
+					sceneNumber = 1;
+					initaliseOneCube();
+					numberOfCubesInScene->setText("1");
+				}
+				break;
+
+			case SDLK_2:
+				if (!help)
+				{
+					//scene 2
+					boxes.clear();
+					sceneNumber = 2;
+					initaliseFiveCubes();
+					numberOfCubesInScene->setText("5");
+				}
+				break;
+			
+			case SDLK_3:
+				if (!help)
+				{
+					//scene 3
+					boxes.clear();
+					sceneNumber = 3;
+					initaliseTenCubes();
+					numberOfCubesInScene->setText("10");
+				}
+				break;
+
+			case SDLK_h:
+				if (!help)
+				{
+					help = true;
+				}
+				else
+				{
+					help = false;
+				}
 			}
 		}
 	}
@@ -99,14 +162,23 @@ void MainState::update(float dt)
 
 void MainState::draw()
 {
-	if (traced)
+	if (help)
 	{
-		rayTrace->pushToScreen(renderer, tracePos);
+		helpImage->pushToScreen(renderer, glm::vec2(0, 0));
 	}
-	background->pushToScreen(renderer, glm::vec2(0,0));
-	helpText->pushToScreen(glm::vec2(240.0f, 0.0f));
-	timeText->pushToScreen(glm::vec2(10.0f, 50.0f));
-	performanceText->pushToScreen(glm::vec2(300.0f, 50.0f));
+	else
+	{
+		if (traced)
+		{
+			rayTrace->pushToScreen(renderer, tracePos);
+		}
+		background->pushToScreen(renderer, glm::vec2(0, 0));
+		helpText->pushToScreen(glm::vec2(240.0f, 0.0f));
+		timeText->pushToScreen(glm::vec2(10.0f, 40.0f));
+		performanceText->pushToScreen(glm::vec2(300.0f, 40.0f));
+		numberOfCubesInSceneText->pushToScreen(glm::vec2(10.0f, 90.0f));
+		numberOfCubesInScene->pushToScreen(glm::vec2(600.0f, 90.0f));
+	}
 }
 
 void MainState::runRayTrace(bool useOpenCL)

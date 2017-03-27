@@ -63,6 +63,8 @@ private:
 	//The loading screens;
 	Texture* loadingWithoutOpenCL;
 	Texture* loadingWithOpenCL;
+	//The help image
+	Texture* helpImage;
 
 	///The performance tester
 	PerformanceTest* tester;
@@ -71,6 +73,8 @@ private:
 	Text* timeText;
 	Text* helpText;
 	Text* performanceText;
+	Text* numberOfCubesInSceneText;
+	Text* numberOfCubesInScene;
 
 	//The dimensions of the ray trace screen
 	glm::vec2 traceDim;
@@ -79,6 +83,10 @@ private:
 
 	//A boolean for if the ray trace is done
 	bool traced;
+
+	bool help;
+
+	int sceneNumber;
 
 	void runRayTrace(bool useOpenCL);
 
