@@ -141,6 +141,39 @@ bool MainState::input()
 				}
 				break;
 
+			case SDLK_4:
+				if (!help)
+				{
+					//scene 4
+					boxes.clear();
+					sceneNumber = 4;
+					initaliseTwentyCubes();
+					numberOfCubesInScene->setText("20");
+				}
+				break;
+
+			case SDLK_5:
+				if (!help)
+				{
+					//scene 5
+					boxes.clear();
+					sceneNumber = 5;
+					initaliseThirtyCubes();
+					numberOfCubesInScene->setText("30");
+				}
+				break;
+
+			case SDLK_6:
+				if (!help)
+				{
+					//scene 6
+					boxes.clear();
+					sceneNumber = 6;
+					initaliseFiftyCubes();
+					numberOfCubesInScene->setText("50");
+				}
+				break;
+
 			case SDLK_h:
 				if (!help)
 				{
@@ -265,5 +298,132 @@ void MainState::initaliseTenCubes()
 	boxes.push_back(Box(25.0f, glm::vec3(60.0f, 50.0f, -100.0f), 30.0f, glm::vec3(1, 1, 0)));
 	boxes.back().setColour(glm::vec3(150.0f, 200.0f, 200.0f));
 	boxes.push_back(Box(35.0f, glm::vec3(100.0f, 190.0f, -100.0f), 340.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(90.0f, 255.0f, 90.0f));
+}
+
+void MainState::initaliseTwentyCubes()
+{
+	initaliseTenCubes();
+	boxes.push_back(Box(50.0f, glm::vec3(150.0f, 50.0f, 0.0f), 45.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(0.0f, 0.0f, 255.0f));
+	boxes.push_back(Box(50.0f, glm::vec3(250.0f, 50.0f, 0.0f), 45.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(0.0f, 255.0f, 0.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(100.0f, 50.0f, 0.0f), 135.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(255.0f, 0.0f, 0.0f));
+	boxes.push_back(Box(35.0f, glm::vec3(100.0f, 0.0f, 0.0f), 20.0f, glm::vec3(1, 1, 1)));
+	boxes.back().setColour(glm::vec3(0.0f, 255.0f, 255.0f));
+	boxes.push_back(Box(15.0f, glm::vec3(0.0f, 200.0f, 0.0f), 225.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(255.0f, 0.0f, 255.0f));
+	boxes.push_back(Box(30.0f, glm::vec3(250.0f, 25.0f, 0.0f), 17.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(255.0f, 255.0f, 0.0f));
+	boxes.push_back(Box(50.0f, glm::vec3(300.0f, 50.0f, 0.0f), 5.0f, glm::vec3(1, 1, 0)));
+	boxes.push_back(Box(50.0f, glm::vec3(250.0f, 200.0f, 0.0f), 320.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(0.0f, 0.0f, 255));
+	boxes.push_back(Box(25.0f, glm::vec3(60.0f, 50.0f, 0.0f), 30.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(150.0f, 200.0f, 200.0f));
+	boxes.push_back(Box(35.0f, glm::vec3(100.0f, 190.0f, 0.0f), 340.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(90.0f, 255.0f, 90.0f));
+	boxes.push_back(Box(30.0f, glm::vec3(250.0f, 25.0f, 0.0f), 17.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(255.0f, 255.0f, 0.0f));
+	boxes.push_back(Box(50.0f, glm::vec3(300.0f, 50.0f, 0.0f), 5.0f, glm::vec3(1, 1, 0)));
+	boxes.push_back(Box(50.0f, glm::vec3(250.0f, 200.0f, 0.0f), 320.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(0.0f, 0.0f, 255));
+	boxes.push_back(Box(25.0f, glm::vec3(60.0f, 50.0f, 0.0f), 30.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(150.0f, 200.0f, 200.0f));
+	boxes.push_back(Box(35.0f, glm::vec3(100.0f, 190.0f, 0.0f), 340.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(90.0f, 255.0f, 90.0f));
+}
+
+void MainState::initaliseThirtyCubes()
+{
+	initaliseTwentyCubes();
+	boxes.push_back(Box(25.0f, glm::vec3(150.0f, 50.0f, -100.0f), 45.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(0.0f, 0.0f, 255.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(250.0f, 50.0f, -100.0f), 45.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(0.0f, 255.0f, 0.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(100.0f, 50.0f, -100.0f), 135.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(255.0f, 0.0f, 0.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(100.0f, 0.0f, -100.0f), 20.0f, glm::vec3(1, 1, 1)));
+	boxes.back().setColour(glm::vec3(0.0f, 255.0f, 255.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(0.0f, 200.0f, -100.0f), 225.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(255.0f, 0.0f, 255.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(250.0f, 25.0f, -100.0f), 17.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(255.0f, 255.0f, 0.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(300.0f, 50.0f, -100.0f), 5.0f, glm::vec3(1, 1, 0)));
+	boxes.push_back(Box(25.0f, glm::vec3(250.0f, 200.0f, -100.0f), 320.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(0.0f, 0.0f, 255));
+	boxes.push_back(Box(25.0f, glm::vec3(60.0f, 50.0f, -100.0f), 30.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(150.0f, 200.0f, 200.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(100.0f, 190.0f, -100.0f), 340.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(90.0f, 255.0f, 90.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(250.0f, 25.0f, -100.0f), 17.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(255.0f, 255.0f, 0.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(300.0f, 50.0f, -100.0f), 5.0f, glm::vec3(1, 1, 0)));
+	boxes.push_back(Box(25.0f, glm::vec3(250.0f, 200.0f, -100.0f), 320.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(0.0f, 0.0f, 255));
+	boxes.push_back(Box(25.0f, glm::vec3(60.0f, 50.0f, -100.0f), 30.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(150.0f, 200.0f, 200.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(100.0f, 190.0f, -100.0f), 340.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(90.0f, 255.0f, 90.0f));
+}
+
+void MainState::initaliseFiftyCubes()
+{
+	initaliseThirtyCubes();
+	boxes.push_back(Box(25.0f, glm::vec3(150.0f, 50.0f, -50.0f), 45.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(0.0f, 0.0f, 255.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(250.0f, 50.0f, -50.0f), 45.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(0.0f, 255.0f, 0.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(100.0f, 50.0f, -50.0f), 135.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(255.0f, 0.0f, 0.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(100.0f, 0.0f, -50.0f), 20.0f, glm::vec3(1, 1, 1)));
+	boxes.back().setColour(glm::vec3(0.0f, 255.0f, 255.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(0.0f, 200.0f, -50.0f), 225.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(255.0f, 0.0f, 255.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(250.0f, 25.0f, -50.0f), 17.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(255.0f, 255.0f, 0.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(300.0f, 50.0f, -50.0f), 5.0f, glm::vec3(1, 1, 0)));
+	boxes.push_back(Box(25.0f, glm::vec3(250.0f, 200.0f, -50.0f), 320.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(0.0f, 0.0f, 255));
+	boxes.push_back(Box(25.0f, glm::vec3(60.0f, 50.0f, -50.0f), 30.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(150.0f, 200.0f, 200.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(100.0f, 190.0f, -50.0f), 340.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(90.0f, 255.0f, 90.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(250.0f, 25.0f, -150.0f), 17.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(255.0f, 255.0f, 0.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(300.0f, 50.0f, -150.0f), 5.0f, glm::vec3(1, 1, 0)));
+	boxes.push_back(Box(25.0f, glm::vec3(250.0f, 200.0f, -150.0f), 320.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(0.0f, 0.0f, 255));
+	boxes.push_back(Box(25.0f, glm::vec3(60.0f, 50.0f, -150.0f), 30.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(150.0f, 200.0f, 200.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(100.0f, 190.0f, -150.0f), 340.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(90.0f, 255.0f, 90.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(150.0f, 50.0f, -150.0f), 45.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(0.0f, 0.0f, 255.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(250.0f, 50.0f, -150.0f), 45.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(0.0f, 255.0f, 0.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(100.0f, 50.0f, -150.0f), 135.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(255.0f, 0.0f, 0.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(100.0f, 0.0f, -150.0f), 20.0f, glm::vec3(1, 1, 1)));
+	boxes.back().setColour(glm::vec3(0.0f, 255.0f, 255.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(0.0f, 200.0f, -150.0f), 225.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(255.0f, 0.0f, 255.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(250.0f, 25.0f, -150.0f), 17.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(255.0f, 255.0f, 0.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(300.0f, 50.0f, -150.0f), 5.0f, glm::vec3(1, 1, 0)));
+	boxes.push_back(Box(25.0f, glm::vec3(250.0f, 200.0f, -150.0f), 320.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(0.0f, 0.0f, 255));
+	boxes.push_back(Box(25.0f, glm::vec3(60.0f, 50.0f, -100.0f), 30.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(150.0f, 200.0f, 200.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(100.0f, 190.0f, -100.0f), 340.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(90.0f, 255.0f, 90.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(250.0f, 25.0f, -100.0f), 17.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(255.0f, 255.0f, 0.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(300.0f, 50.0f, -100.0f), 5.0f, glm::vec3(1, 1, 0)));
+	boxes.push_back(Box(25.0f, glm::vec3(250.0f, 200.0f, -100.0f), 320.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(0.0f, 0.0f, 255));
+	boxes.push_back(Box(25.0f, glm::vec3(60.0f, 50.0f, -100.0f), 30.0f, glm::vec3(1, 1, 0)));
+	boxes.back().setColour(glm::vec3(150.0f, 200.0f, 200.0f));
+	boxes.push_back(Box(25.0f, glm::vec3(100.0f, 190.0f, -100.0f), 340.0f, glm::vec3(1, 1, 0)));
 	boxes.back().setColour(glm::vec3(90.0f, 255.0f, 90.0f));
 }

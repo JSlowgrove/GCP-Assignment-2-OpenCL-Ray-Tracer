@@ -124,7 +124,7 @@ std::vector<unsigned char> RayTracer::runRayTrace(unsigned int xLoopNum, unsigne
 				}
 			}
 
-			float colourDist = Utilities::normaliseFloat(closestPoint, 0.0f, 300.0f);
+			float colourDist = Utilities::normaliseFloat(closestPoint, 0.0f, 600.0f);
 
 			if (colourDist < 0.0f)
 			{

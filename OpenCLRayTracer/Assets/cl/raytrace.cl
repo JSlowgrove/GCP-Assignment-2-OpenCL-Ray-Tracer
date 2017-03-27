@@ -135,7 +135,7 @@ __kernel void RayTrace(unsigned int numberOfBoxes, float4 rayDirection,
 		}
 	}
 
-	float colourDist = normaliseFloat(closestPoint, 0.0f, 300.0f);
+	float colourDist = normaliseFloat(closestPoint, 0.0f, 600.0f);
 
 	if (colourDist < 0.0f)
 	{

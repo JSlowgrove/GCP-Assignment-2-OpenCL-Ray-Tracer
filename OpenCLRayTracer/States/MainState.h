@@ -99,4 +99,7 @@ private:
 	void initaliseOneCube();
 	void initaliseFiveCubes();
 	void initaliseTenCubes();
+	void initaliseTwentyCubes();
+	void initaliseThirtyCubes();
+	void initaliseFiftyCubes();
 };
