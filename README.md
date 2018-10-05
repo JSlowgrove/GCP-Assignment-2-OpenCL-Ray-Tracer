@@ -9,3 +9,5 @@ https://www.libsdl.org/
 https://www.libsdl.org/projects/SDL_image/  
 https://www.libsdl.org/projects/SDL_mixer/   
 https://www.libsdl.org/projects/SDL_ttf/  
+
+Created during the final year of my undergraduate course at university. This was my second Graphics and Computational Programming assignment. Built in C++ using SDL, OpenGL and OpenCL.
